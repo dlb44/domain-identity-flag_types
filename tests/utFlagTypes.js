@@ -41,6 +41,7 @@ describe('API Flag Type Unit Tests', function () {
     return api.request({method: 'GET', path: '/'})
       .then(res => { ut.testMockResponseSuccess(res, 200); });
   });
+
   it("POST /  201", () => {
     return api.request({
       method: 'POST', path: '/',
@@ -51,5 +52,42 @@ describe('API Flag Type Unit Tests', function () {
       .then(res => {
         expect(res.statusCode).to.equal(201);
       });
+  });
+
+    it("DELETE /hold  204", () => {
+        return api.request({
+            method: 'DELETE', path: '/hold'
+        })
+            .then(res => {
+                expect(res.statusCode).to.equal(204);
+            });
+    });
+
+  it("GET /hold 404", () => {
+      return api.request({method: 'GET', path: '/hold'})
+          .then(res => {
+              ut.testResponseError(res, 404);
+          });
+  });
+    it("GET /degree 200", () => {
+        return api.request({method: 'GET', path: '/degree'})
+            .then(res => {
+                ut.testMockResponseSuccess(res, 200);
+                let body = JSON.parse(res.body);
+                expect(body.name).to.equal("degree");
+            });
+    });
+
+  it("PUT /hold  200", () => {
+      return api.request({
+          method: 'PUT', path: '/hold',
+          body: {
+              "name": "HOLD",
+              "explanation": "country divided into 2"
+          }
+      })
+          .then(res => {
+              expect(res.statusCode).to.equal(200);
+          });
   });
 });

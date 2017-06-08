@@ -142,6 +142,142 @@
           }
         }
       }
+    },
+    "/{flag_name}": {
+      "x-controller": "flag_types",
+      "get": {
+        "summary": "domain-identity-flag_types-by-name",
+        "description": "domain-identity-flag_types-by-name",
+        "operationId": "getflag_type",
+        "parameters": [
+          {
+            "name": "flag_name",
+            "in": "path",
+            "description": "flag_type name parameter.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of flag_type",
+            "schema": {
+              "$ref": "#/definitions/flag_type"
+            },
+            "examples": {
+              "application/json": {
+                "$ref": "#/x-mock_json/flag_types/values/0"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "description": "There is no matching flag_types",
+            "schema": {
+              "$ref": "#/definitions/simple_metadata"
+            }
+          },
+          "409": {
+            "$ref": "#/responses/409"
+          },
+          "default": {
+            "$ref": "#/responses/default"
+          }
+        }
+      },
+      "put": {
+        "summary": "domain-identity-flag_types-by-name",
+        "description": "modify a flag type",
+        "operationId": "modify_flag_type",
+        "parameters": [
+          {
+            "name": "flag_name",
+            "in": "path",
+            "description": "flag_type name parameter.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "flag_name",
+            "in": "body",
+            "description": "New flag_type value",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/flag_type_new"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "flag type successfully modified",
+            "schema": {
+              "$ref": "#/definitions/flag_type"
+            },
+            "examples": {
+              "application/json": {
+                "$ref": "#/x-mock_json/flag_types/values/0"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "409": {
+            "$ref": "#/responses/409"
+          },
+          "default": {
+            "$ref": "#/responses/default"
+          }
+        }
+      },
+      "delete": {
+        "summary": "domain-identity-flag_types-by-name",
+        "description": "delete a flag type",
+        "operationId": "delete_flag_type",
+        "parameters": [
+          {
+            "name": "flag_name",
+            "in": "path",
+            "description": "flag_type name parameter.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "flag type successfully deleted"
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "409": {
+            "$ref": "#/responses/409"
+          },
+          "default": {
+            "$ref": "#/responses/default"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -380,6 +516,9 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/name"
+        },
+        "explanation": {
+          "$ref": "#/definitions/explanation"
         }
       },
       "example": {
@@ -644,7 +783,8 @@
       ]
     },
     "flag_type_new": {
-      "name": "HOLD"
+      "name": "HOLD",
+      "explanation": "new flag type."
     },
     "xhealth_response": {
       "validation_response": {

@@ -50,14 +50,48 @@ describe('Mock API Unit Tests', function () {
     return api.request({
       method: 'POST', path: '/',
       query: { mock: '' },
-      body: {
-        "name": "HOLD"
-      }
+        body: {
+            "name": "HOLD",
+            "explanation": "country divided into 2"
+        }
     })
       .then(res => {
         expect(res.statusCode).to.equal(201);
       });
   });
+
+  it("DELETE /hold  204", () => {
+      return api.request({
+          method: 'DELETE', path: '/hold',
+          query: { mock: '' }
+      })
+          .then(res => {
+              expect(res.statusCode).to.equal(204);
+          });
+  });
+
+  it("GET /hold 200", () => {
+      return api.request({method: 'GET', path: '/hold', query: { mock: '' }})
+          .then(res => {
+              ut.testMockResponseSuccess(res, 200);
+              let body = JSON.parse(res.body);
+              expect(body.name).to.equal("HOLD");
+          });
+  });
+
+    it("PUT /hold  200", () => {
+        return api.request({
+            method: 'PUT', path: '/hold',
+            query: { mock: '' },
+            body: {
+                "name": "HOLD",
+                "explanation": "country divided into 2"
+            }
+        })
+            .then(res => {
+                expect(res.statusCode).to.equal(200);
+            });
+    });
 
   // ----- XServer Health -----
   it("GET /xhealth 200", () => {
