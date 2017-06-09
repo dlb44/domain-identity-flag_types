@@ -28,7 +28,7 @@ let flagTypeData = {
 }
 
 function generateFlagInstance(name) {
-    let response = {}
+    let response = {};
 
     if (flagTypeData[name] === undefined) return {
         "validation_response": {
@@ -67,11 +67,42 @@ function generateFlagInstance(name) {
     return response;
 }
 
+function generateFlagCollection() {
+    let response = {};
+
+    response.links = {
+        "flag_types__info": {
+            "rel": "self",
+            "href": "https://api.byu.edu/domains/domain/identity/flag_types/v1/",
+            "method": "GET"
+        },
+        "flag_types__create": {
+            "rel": "flag_types__create",
+            "href": "https://api.byu.edu/domains/domain/identity/flag_types/v1/",
+            "method": "POST"
+        }
+    };
+    response.metadata = {
+        "validation_response": {
+            "return_code": 200,
+            "response": "Successful"
+        }
+    };
+
+    response.values = [];
+    Object.keys(flagTypeData).forEach((item) => {
+        response.values.push(generateFlagInstance(item));
+    });
+    return response;
+}
+
 
 // ----- Exported Endpoint Handlers -----
 exports.getflag_types = function (req, res) {
   console.log("Invoked getflag_types");
-  exports.getflag_types.mock(req, res);
+  // exports.getflag_types.mock(req, res);
+    res.send(generateFlagCollection());
+
 };
 
 exports.getflag_types.mock = function (req, res) {
