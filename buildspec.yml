@@ -1,0 +1,16 @@
+version: 0.1
+phases:
+  install:
+    commands:
+      - echo no os dependencies required
+  pre_build:
+    commands:
+      - echo Installing requirements from package.json
+      - npm install
+      - npm test
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - ./**/*
