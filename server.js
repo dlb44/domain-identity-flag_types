@@ -21,6 +21,9 @@ const express           = require('express');
 const bodyParser        = require('body-parser');
 // ----- Set up the Express server -----
 const app = express();
+app.get('/xhealth', (req,res) => {
+  res.send("we're up!!");
+});
 app.use(bodyParser.json());
 app.use(api.express({
   controllers: path.resolve(__dirname, './controllers'),

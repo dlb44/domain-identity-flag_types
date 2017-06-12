@@ -18,30 +18,6 @@
     "application/json"
   ],
   "paths": {
-    "/xhealth": {
-      "x-controller": "xhealth",
-      "get": {
-        "summary": "Endpoint required for health check",
-        "description": "Responds with a success validation_response (200) when pinged",
-        "operationId": "getHealthCheck",
-        "responses": {
-          "200": {
-            "description": "Successful response for health check",
-            "schema": {
-              "$ref": "#/definitions/simple_metadata"
-            },
-            "examples": {
-              "application/json": {
-                "$ref": "#/x-mock_json/xhealth_response"
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/responses/default"
-          }
-        }
-      }
-    },
     "/": {
       "x-controller": "flag_types",
       "get": {
